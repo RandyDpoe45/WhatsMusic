@@ -1,0 +1,67 @@
+.dropdown-item{
+	cursor: pointer;
+}
+
+.slider-group {
+	margin-bottom: 10px;
+}
+
+.th{
+
+  background-color: #000000;
+}
+
+.controls {
+	text-align: center;
+}
+button{
+	position: relative;
+outline: none;
+}
+button.pause {
+
+  width: 74px;
+  height: 74px;
+  border-style: double;
+	border-width: 0px 0px 0px 50px;
+	border-color: #202020;
+	background-color: white;
+}
+
+button.stop {
+
+  width: 74px;
+  height: 74px;
+  border-style: solid;
+  border-width: 15px 15px 15px 15px;
+  border-color: #202020;
+}
+
+button.play {
+
+
+	width: 74px;
+	height: 64px;
+	box-sizing: border-box;
+  border-style: solid;
+  border-width: 36px 0px 36px 74px;
+  border-color: white white white #202020;
+}
+button.play:hover {
+	border-color:  white white white rgb(126, 200, 101);
+}
+
+button.stop:hover {
+	background-color: rgb(178, 78, 78);
+
+}
+button.pause:hover {
+	border-color:  yellow;
+
+}
+
+.navbar{
+	position: fixed;
+	width: 100%;
+	z-index: 1000;
+}

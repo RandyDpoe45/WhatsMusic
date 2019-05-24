@@ -1,0 +1,63 @@
+{% load staticfiles%}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Registrowhatsmusic</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- MATERIAL DESIGN ICONIC FONT -->
+		<link href="{% static "fonts/material-design-iconic-font/css/material-design-iconic-font.css" %}" rel="stylesheet" >
+
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="{%static "css/style.css" %}">
+	</head>
+
+	<body>
+
+		<div class="wrapper" style="background-image: url({% static 'img/audio-audio-mixer-bass-690779.jpg'%})">
+			<div class="inner">
+				<div class="image-holder">
+					<img src="{% static "img/LOGOWM3.PNG" %}" alt="">
+				</div>
+				<form action="/whatsmusic/crearRegistro/" method="POST">
+                    {% csrf_token %}
+					<h3>Registro</h3>
+
+					<div class="form-group">
+						<input type="text" placeholder="Nombre" class="form-control" name="nombre">
+						<input type="text" placeholder="Apellidos" class="form-control" name="apellido">
+					</div>
+					<div class="form-wrapper">
+						<input type="text" placeholder="Nombre de usuario" class="form-control" name="user">
+						<i class="zmdi zmdi-account"></i>
+					</div>
+					<div class="form-wrapper">
+						<input type="text" placeholder="Correo electronico" class="form-control" name="email">
+						<i class="zmdi zmdi-email"></i>
+					</div>
+
+					<div class="form-wrapper">
+						<input type="password" placeholder="Contraseña" class="form-control" name="pass">
+						<i class="zmdi zmdi-lock"></i>
+					</div>
+					<div class="form-wrapper">
+						<input type="password" placeholder="Confirmar constraseña" class="form-control" name="cPass">
+						<i class="zmdi zmdi-lock"></i>
+					</div>
+                    {% if messages %}
+                    <ul>
+	                    {% for message in messages %}
+	                        <li>{{ message }}</li>
+	                    {% endfor %}
+                    </ul>
+                    {% endif %}
+					<button type="submit">Register
+						<i class="zmdi zmdi-arrow-right"></i>
+					</button>
+				</form>
+			</div>
+		</div>
+
+	</body>
+</html>

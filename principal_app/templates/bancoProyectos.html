@@ -1,0 +1,259 @@
+{% load staticfiles%}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Banco Proyectos</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href={% static "vendor/bootstrap/css/bootstrap.min.css"%} rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css">
+  <!-- Custom fonts for this template -->
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href={% static "css/one-page-wonder.min.css" %} rel="stylesheet">
+  <link href={% static "css/Ingesoft.css" %} rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.js"></script>
+</head>
+
+  <header class="masthead text-center text-white">
+    <div class="masthead-content">
+      <div class="container">
+        <h1 class="masthead-heading mb-0">Whatsmusic</h1>
+        <h2 class="masthead-subheading mb-0">FuryaRecords</h2>
+
+      </div>
+    </div>
+
+  </header>
+
+<body>
+
+
+
+
+
+
+
+
+<div class="container">
+<div class="row">
+    <style>
+        h5 {
+  font-family: b;
+  font-size: 1.12em;
+ font-variant:small-caps;
+}
+        </style>
+
+    <div class="col-md-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                <div class="file-manager">
+                    <h2>Mi unidad</h2>
+
+                    <button data-toggle="modal" data-target="#exampleModal"  class="btn btn-primary btn-block" >Nuevo proyecto</button>
+                    <button data-toggle="modal" data-target="#borrarProyecto"  class="btn btn-primary btn-block" >Borrar proyecto</button>
+                    <button   class="btn btn-primary btn-block" onclick="salir()">Salir</button>
+                    </div>
+                    <div class="form-wrapper">
+                    <input id= "diez" type="hidden" name="userexit" value="" />
+                    </div>
+                    <script>
+                    function salir() {
+                     window.location="/whatsmusic/";
+                    }
+                    </script>
+
+
+                    <div class="hr-line-dashed"></div>
+                    <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="inputGroupFileAddon01"></span>
+                            </div>
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                              <label class="custom-file-label" for="inputGroupFile01"></label>
+                            </div>
+                          </div>
+
+                    <div class="hr-line-dashed"></div>
+
+
+
+                    <!-- Search form -->
+
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9 animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <!-- ACA EMPIEZAN LAS CARPETAS DE LOS PROYECTOS -->
+
+                </div>
+                <div class="file-box">
+                    {%  for proy in proyectos %}
+                    <div class="file">
+                        <a id="aux" href="/whatsmusic/bancotrabajo">
+                            <span class="corner"></span>
+
+                            <div class="image">
+                                <img alt="image" class="img-responsive" src={% static "img/Captura.PNG"  %}>
+                            </div>
+                            <div class="file-name">
+                               {{ proy.nombre }}
+                                <br>
+                                <small>Agregado: 2019</small>
+                            </div>
+                        </a>
+
+                    </div>
+                    {%  endfor %}
+                </div>
+
+
+
+            </div>
+        </div>
+        </div>
+    </div>
+
+<div class="modal fade" id="borrarProyecto" role="dialog" aria-labelledby="borrarProyectoLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="borrarProyecto">Borrar Proyecto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <form action="/whatsmusic/borrarProyecto/" method="POST">
+      <div class="modal-body">
+
+            {% csrf_token %}
+
+              <div class="form-wrapper">
+                    <input id="nom" type="text" placeholder="Nombre del proyecto que desea borrar" class="form-control" name="nom">
+              </div>
+              <div class="form-wrapper">
+              <input id= "nueve" type="hidden" name="usr" value="" />
+              </div>
+
+            <span id="mess"></span>
+
+
+      </div>
+      <div class="modal-footer">
+        <button  type= 'button' class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button  class="btn btn-primary" id="np">Borrar Proyecto</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Crear Proyecto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <form action="/whatsmusic/crearProyecto/" method="POST">
+      <div class="modal-body">
+
+            {% csrf_token %}
+
+              <div class="form-wrapper">
+                    <input id="name" type="text" placeholder="Nombre del proyecto" class="form-control" name="name">
+              </div>
+              <div class="form-wrapper">
+              <input id= "ocho" type="hidden" name="usrname" value="" />
+              </div>
+
+            <span id="mess"></span>
+
+
+      </div>
+      <div class="modal-footer">
+        <button  type= 'button' class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button  class="btn btn-primary" id="np">Crear Proyecto</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+</div>
+  <script>
+      function getCookie(name) {
+          var value = "; " + document.cookie;
+          var parts = value.split("; " + name + "=");
+          if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+        window.onload =function () {
+            document.getElementById("ocho").value=getCookie("username");
+            document.getElementById("nueve").value=getCookie("username");
+            document.getElementById("diez").value=getCookie("userexit");
+            var but=document.getElementById("aux");
+            but.onclick = function(){
+                document.cookie="project = "+ but.innerText + "; path=/ ";
+            }
+        }
+      /*window.onload = function () {
+          var bt =document.getElementById("np");
+              var url2 = window.location.origin + "/whatsmusic/crearProyecto/";
+              bt.onclick = function () {
+                  var name = document.getElementById("recipient-name").value
+                    if (name!='') {
+                        $("#mess").text("");
+                      var request = new XMLHttpRequest();
+                      request.open("POST", url2, true);
+                      request.responseType = "document";
+                      request.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
+
+                      request.onload = function (oEvent) {
+                          var doc = request.response;
+
+                          if (doc) {
+                              alert(doc);
+                          }
+                      }
+                      var data = new FormData();
+                      data.append("USRNAME", getCookie("username"));
+                      data.append("nomProy", name);
+                      request.send(data);
+                      $("#exampleModal").modal('hide');
+                      }else{
+                        $("#mess").text("por favor ingrese un nombre valido");
+                      }
+              }
+
+      }*/
+      
+  </script>
+
+
+</html>
